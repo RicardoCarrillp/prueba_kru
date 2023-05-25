@@ -1,0 +1,78 @@
+::ng-deep
+  .mat-form-field-appearance-outline.mat-focused
+  .mat-form-field-outline-thick {
+  color: #006191 !important;
+}
+
+::ng-deep
+  .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid
+  .mat-form-field-outline-thick {
+  color: red !important;
+  opacity: 0.8 !important;
+}
+
+::ng-deep .mat-input-element {
+  caret-color: red !important;
+}
+
+::ng-deep .mat-form-field-invalid .mat-input-element,
+.mat-warn .mat-input-element {
+  caret-color: red !important;
+}
+::ng-deep .mat-focused .mat-form-field-label {
+  color: #006191 !important;
+}
+::ng-deep .mat-datepicker-toggle {
+  color: #006191 !important;
+}
+
+.title-new-contact {
+  margin-top: 2em;
+  margin-left: 10vw;
+  h2 {
+    font-weight: 600;
+    color: #006191;
+  }
+}
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .container-form {
+    .form {
+      display: flex;
+      border-radius: 20px;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 1em;
+      justify-content: center;
+    }
+    background-color: #f6f6f6;
+    width: 90%;
+    border-radius: 20px;
+  }
+  .buttons {
+  display: flex;
+  margin-top: 1em;
+  justify-content: center;
+  gap: 4em;
+  .cancel-button {
+    background-color: #d1d1d1;
+    color: #fff;
+    border-radius: 20px;
+  }
+  .send-button {
+    background-color: #64cd98;
+    color: #fff;
+    border-radius: 20px;
+  }
+  .send-button:disabled {
+    background-color: #d1d1d1;
+    color: #fff;
+    border-radius: 20px;
+  }
+}
+
+}

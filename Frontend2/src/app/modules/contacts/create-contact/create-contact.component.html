@@ -1,3 +1,74 @@
-<p>
-  create-contact works!
-</p>
+<div class="title-new-contact">
+  <h2>Nuevo contacto</h2>
+</div>
+
+<div class="container">
+  <div class="container-form">
+    <form class="form" [formGroup]="contactForm">
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="name" required />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Apellido</mat-label>
+        <input matInput formControlName="lastName" required />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Enter your email</mat-label>
+        <input
+          matInput
+          placeholder="pat@example.com"
+          formControlName="email"
+          required
+        />
+        <!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error> -->
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Cel/Tel</mat-label>
+        <input matInput formControlName="phone" required />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha de nacimiento</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="birthday" />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Dirección</mat-label>
+        <input matInput formControlName="address" required />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Tipo de contacto</mat-label>
+        <mat-select formControlName="typeContact">
+          <mat-option value="client">Cliente</mat-option>
+          <mat-option value="admin">Administrador</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Origen</mat-label>
+        <mat-select formControlName="origin">
+          <mat-option value="landingP">Landing page</mat-option>
+          <mat-option value="home">Home</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </div>
+
+  <div class="buttons">
+    <button class="cancel-button" mat-flat-button (click)="goBack()">
+      <span>Cancelar</span>
+    </button>
+
+    <button
+      class="send-button"
+      mat-flat-button
+      (click)="sendInfo()"
+      [disabled]="!contactForm.valid"
+    >
+      <span>Agregar</span>
+    </button>
+  </div>
+</div>

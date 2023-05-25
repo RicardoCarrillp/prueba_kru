@@ -7,13 +7,20 @@
   background-color: #006191;
   width: 100%;
   border-radius: 20px 20px 0px 0px;
-  height: 9vh;
-  button{
+  button {
     color: white;
-    .flex-button{
+    .selected {
+      width: 70%;
+      position: absolute;
+      top: 0px;
+      background-color: #64cd98;
+      height: 1vh;
+    }
+    .flex-button {
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin-top: 1vh;
     }
   }
 }

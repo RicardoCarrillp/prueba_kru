@@ -13,5 +13,9 @@ export class ContactsService {
 
   getContacts(): Observable<Result> {
     return this.http.get<Result>(`${environment.urlApi}contacts`);
-}
+  }
+  createContacts(contact: Contacts): Observable<Result> {
+    return this.http.post<Result>(`${environment.urlApi}contacts`, contact);
+
+  }
 }

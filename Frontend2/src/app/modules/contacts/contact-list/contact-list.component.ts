@@ -3,6 +3,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { buttons } from 'src/app/global/buttons-list';
 import { buttonsList } from 'src/app/models/buttons.model';
 import { Result } from 'src/app/models/result.model';
+import { AlertService } from 'src/app/services/alert.service';
 import { ContactsService } from 'src/app/services/contacts.service';
 
 @Component({
@@ -16,25 +17,30 @@ export class ContactListComponent implements OnInit {
   loading!:boolean;
   private unsubscribe$ = new Subject<void>();
 
-  constructor(private contactsService: ContactsService) {
+  constructor(private contactsService: ContactsService, private alertService: AlertService) {
     this.buttonList = buttons
   }
 
   ngOnInit() {
     this.loading = true
     this.contactsService.getContacts()
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((contacts:Result) => {
-        console.log(contacts.data);
-        if (contacts.status===200) {
-          this.contactList = contacts.data;
+      .pipe(takeUntil(this.unsubscribe$)).subscribe({
+        next:(contacts) => {
+          console.log(contacts.data);
+          if (contacts.status === 200) {
+            this.contactList = contacts.data;
+            this.loading = false
+          } else {
+            console.log(contacts.data)
+            this.loading = false
+          }
+        },
+        error:(err)=> {
+          console.log(err)
+          this.alertService.showAlert("Hubo un error en el servidor", 'error')
           this.loading = false
-        }else{
-          console.log(contacts.data)
-          this.loading = false
-        }
-
-      });
+        },
+      })
   }
 
   ngOnDestroy(): void {
