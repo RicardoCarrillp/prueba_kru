@@ -3,7 +3,7 @@ import admin  from 'firebase-admin';
 require('dotenv').config();
 
 const router= express.Router();
-var serviceAccount = require("../../contactkru-22bd9-firebase-adminsdk-z2h2s-7567b3d234.json");
+var serviceAccount = require("../../keyFirebase.json");
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),

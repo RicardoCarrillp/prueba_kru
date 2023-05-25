@@ -8,5 +8,4 @@ const port = process.env.PORT;
 
 
 app.use("/api/contacts", contactRouter)
-
 app.listen(port, () => console.log(`App listening on port ${port}!`))
