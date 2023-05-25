@@ -1,26 +1,31 @@
 import express from 'express'
 import admin  from 'firebase-admin';
+const { v4: uuidv4 } = require('uuid');
+
 require('dotenv').config();
 
 const router= express.Router();
-var serviceAccount = require("../../keyFirebase.json");
+const serviceAccount = require("../../keyFirebase.json");
 
 admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: process.env.DATABASE_URL
+    credential: admin.credential.cert(serviceAccount)
 })
 
-const db = admin.database();
+const db = admin.firestore(); 
 
-router.get('/', (_req, res) => {
-    db.ref('contacts').once('value',(snapshot)=>{
-        const contacts= snapshot.val();
-        res.send({ contacts: contacts });
+router.get('/', async (_req, res) => {
+    const docsRef = await db.collection('contacts');
+    const mainDocs:any = [];
 
-    })
+    const docs = await docsRef.get();
+    docs.forEach(async (doc) => {
+        mainDocs.push({ ...doc.data(), id: doc.id });
+    });
+
+    res.send(mainDocs)
 })
 
-router.post('/', (req, res) =>{
+router.post('/', async(req, res) =>{
     const newContact={
         name:req.body.name,
         lastName: req.body.lastName,
@@ -31,7 +36,8 @@ router.post('/', (req, res) =>{
         typeContact: req.body.typeContact,
         origin: req.body.origin,
     }
-    db.ref('contacts').push(newContact)
+    const contactsDb = db.collection('contacts');
+    await contactsDb.doc(uuidv4()).set(newContact); 
     res.send(`saving a ${newContact.name}`)
 })
 
