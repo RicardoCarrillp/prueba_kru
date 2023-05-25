@@ -1,0 +1,20 @@
+<div class="contacts">
+  <div class="list">
+    <div class="item" *ngFor="let contact of contactList">
+      <div class="data">
+        <h2>
+          {{ contact.name | titlecase }} {{ contact.lastName | titlecase }}
+        </h2>
+        <h3>(+57) {{ contact.phone }}</h3>
+      </div>
+
+      <div class="buttons">
+        <button mat-icon-button *ngFor="let item of buttonList">
+          <mat-icon>{{ item.icon }}</mat-icon>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</div>
