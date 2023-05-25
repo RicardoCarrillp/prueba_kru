@@ -26,12 +26,10 @@ export class ContactListComponent implements OnInit {
     this.contactsService.getContacts()
       .pipe(takeUntil(this.unsubscribe$)).subscribe({
         next:(contacts) => {
-          console.log(contacts.data);
           if (contacts.status === 200) {
             this.contactList = contacts.data;
             this.loading = false
           } else {
-            console.log(contacts.data)
             this.loading = false
           }
         },

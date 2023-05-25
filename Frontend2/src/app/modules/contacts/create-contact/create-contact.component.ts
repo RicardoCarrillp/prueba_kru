@@ -50,9 +50,6 @@ export class CreateContactComponent implements OnInit {
         this.alertService.showAlert("No se pudo crear el contacto", 'error');
       }
     })
-    console.log(this.contactForm.value)
-
-
   }
 
   goBack() {
