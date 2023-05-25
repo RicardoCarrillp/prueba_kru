@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: 'contacts',
-    loadChildren: () => import('./components/contacts/contacts.module').then(m => m.ContactsModule)
+    loadChildren: () => import('./modules/contacts/contacts.module').then(m => m.ContactsModule)
   },
   { path: '**', redirectTo: 'contacts' }
 

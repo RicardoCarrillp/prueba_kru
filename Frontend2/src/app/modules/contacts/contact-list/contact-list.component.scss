@@ -1,3 +1,7 @@
+.mat-spinner::ng-deep circle {
+  stroke: #006191;
+}
+
 .contacts {
   display: flex;
   align-items: center;
@@ -25,5 +29,9 @@
         align-items: center;
       }
     }
+  }
+
+  .loading-spinner {
+    margin: 5em;
   }
 }

@@ -7,4 +7,5 @@ export interface Contacts{
   address: string,
   typeContact: string,
   origin: string,
+  id:string
 }

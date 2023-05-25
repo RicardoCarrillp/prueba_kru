@@ -3,14 +3,17 @@ import { buttonsBar } from "../models/buttons.model";
 export const buttons: buttonsBar[] = [
   {
     icon: 'person',
-    label: 'Contactos'
+    label: 'Contactos',
+    path:'contacts'
   },
   {
     icon: 'task',
-    label: 'Tareas'
+    label: 'Tareas',
+    path:'tasks'
   },
   {
     icon: 'comment',
-    label: 'Comentarios'
+    label: 'Comentarios',
+    path:'comments'
   },
 ]

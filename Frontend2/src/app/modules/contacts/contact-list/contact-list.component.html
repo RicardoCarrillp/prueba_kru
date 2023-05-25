@@ -1,5 +1,5 @@
 <div class="contacts">
-  <div class="list">
+  <div class="list" *ngIf="!loading">
     <div class="item" *ngFor="let contact of contactList">
       <div class="data">
         <h2>
@@ -7,14 +7,14 @@
         </h2>
         <h3>(+57) {{ contact.phone }}</h3>
       </div>
-
       <div class="buttons">
         <button mat-icon-button *ngFor="let item of buttonList">
           <mat-icon>{{ item.icon }}</mat-icon>
         </button>
       </div>
-
     </div>
-
+  </div>
+  <div *ngIf="loading" class="loading-spinner">
+    <mat-spinner  [diameter]="70" ></mat-spinner>
   </div>
 </div>
