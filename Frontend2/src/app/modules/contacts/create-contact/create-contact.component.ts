@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Contacts } from 'src/app/models/contact.model';
 import { AlertService } from 'src/app/services/alert.service';
 import { ContactsService } from 'src/app/services/contacts.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-create-contact',
@@ -12,7 +13,8 @@ import { ContactsService } from 'src/app/services/contacts.service';
 })
 export class CreateContactComponent implements OnInit {
   contactForm: FormGroup;
-  constructor(private fb: FormBuilder, private route: Router, private contactsService: ContactsService, private alertService: AlertService) {
+  constructor(private fb: FormBuilder, private route: Router, private contactsService: ContactsService,
+    private alertService: AlertService, private loadingService: LoadingService) {
     this.contactForm = this.fb.group({
       name: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -29,8 +31,9 @@ export class CreateContactComponent implements OnInit {
   }
 
   sendInfo() {
-    const stringDate = this.dateToString();
+    this.loadingService.setLoading(true);
 
+    const stringDate = this.dateToString();
     const contact: Contacts = {
       name: this.contactForm.value.name,
       lastName: this.contactForm.value.lastName,
@@ -43,10 +46,12 @@ export class CreateContactComponent implements OnInit {
     }
     this.contactsService.createContacts(contact).subscribe({
       next: () => {
+        this.loadingService.setLoading(false);
         this.alertService.showAlert("Contacto creado con exito", 'success');
         this.goBack();
       },
       error: (err) => {
+        this.loadingService.setLoading(false);
         this.alertService.showAlert("No se pudo crear el contacto", 'error');
       }
     })

@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BottomBarModule } from './shared/bottom-bar/bottom-bar.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { LoadingModule } from './shared/loading/loading.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     BottomBarModule,
-    HttpClientModule
+    HttpClientModule,
+    LoadingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

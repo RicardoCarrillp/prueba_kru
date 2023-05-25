@@ -5,6 +5,7 @@ import { buttonsList } from 'src/app/models/buttons.model';
 import { Result } from 'src/app/models/result.model';
 import { AlertService } from 'src/app/services/alert.service';
 import { ContactsService } from 'src/app/services/contacts.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-contact-list',
@@ -14,32 +15,32 @@ import { ContactsService } from 'src/app/services/contacts.service';
 export class ContactListComponent implements OnInit {
   buttonList!:buttonsList[];
   contactList!: any;
-  loading!:boolean;
   private unsubscribe$ = new Subject<void>();
 
-  constructor(private contactsService: ContactsService, private alertService: AlertService) {
+  constructor(private contactsService: ContactsService, private alertService: AlertService, private loadingService: LoadingService) {
     this.buttonList = buttons
   }
 
   ngOnInit() {
-    this.loading = true
+    this.loadingService.setLoading(true);
     this.contactsService.getContacts()
       .pipe(takeUntil(this.unsubscribe$)).subscribe({
         next:(contacts) => {
           if (contacts.status === 200) {
             this.contactList = contacts.data;
-            this.loading = false
+            this.loadingService.setLoading(false);
           } else {
-            this.loading = false
+            this.loadingService.setLoading(false);
           }
         },
         error:(err)=> {
           console.log(err)
           this.alertService.showAlert("Hubo un error en el servidor", 'error')
-          this.loading = false
+          this.loadingService.setLoading(false);
         },
       })
   }
+
 
   ngOnDestroy(): void {
     this.unsubscribe$.next();
