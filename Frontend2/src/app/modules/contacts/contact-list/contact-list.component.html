@@ -8,10 +8,11 @@
         <h3>(+57) {{ contact.phone }}</h3>
       </div>
       <div class="buttons">
-        <button mat-icon-button *ngFor="let item of buttonList">
+        <button mat-icon-button *ngFor="let item of buttonList" (click)="buttonsOptions(item.icon,contact)">
           <mat-icon>{{ item.icon }}</mat-icon>
         </button>
       </div>
     </div>
   </div>
 </div>
+

@@ -42,8 +42,6 @@ export class AppComponent implements OnInit {
       }
     })
     this.loadingService.loading$.subscribe((loading: boolean) => {
-      console.log(loading);
-
       this.loading = loading;
     })
   }

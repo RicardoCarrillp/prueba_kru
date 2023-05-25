@@ -1,0 +1,6 @@
+<h1 mat-dialog-title>Elimnar Contacto {{ data.name | titlecase }}</h1>
+<div mat-dialog-content>¿Estas seguro?</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>No</button>
+  <button mat-button  cdkFocusInitial color="warn" (click)="deleteContact()">Sí</button>
+</div>

@@ -8,6 +8,7 @@ import { BottomBarModule } from './shared/bottom-bar/bottom-bar.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { LoadingModule } from './shared/loading/loading.module';
+import { DeleteModalModule } from './shared/modals/delete-modal/delete-modal.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { LoadingModule } from './shared/loading/loading.module';
     ToastrModule.forRoot(),
     BottomBarModule,
     HttpClientModule,
-    LoadingModule
+    LoadingModule,
+    DeleteModalModule
   ],
   providers: [],
   bootstrap: [AppComponent]
