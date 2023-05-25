@@ -28,7 +28,23 @@ const getContacts =  async (_req: any, res: any) => {
         res.send(result)
     }
 }
+const deleteContacts = async (req: any, res: any) => {
+    try {
+        await db.collection('contacts').doc(req.params.id).delete();
+        const result = {
+            status: 200,
+            data: `Contact successfully deleted`
+        }
+        res.send(result);
+    } catch (error:any) {
+        const result = {
+            status: 500,
+            data: error.message
+        }
+        res.send(result);
+    }
 
+}
 const createContacts = async (req: any, res: any )=>{
     try {
         const newContact:Contacts = {
@@ -59,4 +75,4 @@ const createContacts = async (req: any, res: any )=>{
 
 }
 
-export { getContacts,createContacts };
+export { getContacts, createContacts, deleteContacts };
