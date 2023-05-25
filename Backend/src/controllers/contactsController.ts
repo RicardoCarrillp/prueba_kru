@@ -1,4 +1,5 @@
 
+import { Contacts } from '../models/contacts.model';
 import db from '../services/db'
 const { v4: uuidv4 } = require('uuid');
 require('dotenv').config();
@@ -6,7 +7,7 @@ require('dotenv').config();
 const getContacts =  async (_req: any, res: any) => {
     try {
         const docsRef = await db.collection('contacts');
-        const mainDocs: any = [];
+        const mainDocs: Contacts[] = [];
 
         const docs = await docsRef.get();
         docs.forEach(async (doc) => {
@@ -30,7 +31,7 @@ const getContacts =  async (_req: any, res: any) => {
 
 const createContacts = async (req: any, res: any )=>{
     try {
-        const newContact = {
+        const newContact:Contacts = {
             name: req.body.name,
             lastName: req.body.lastName,
             email: req.body.email,
@@ -57,9 +58,5 @@ const createContacts = async (req: any, res: any )=>{
     }
 
 }
-
-// module.exports ={
-//     createContacts
-// }
 
 export { getContacts,createContacts };
