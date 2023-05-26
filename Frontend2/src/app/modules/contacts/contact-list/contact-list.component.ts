@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { buttons } from 'src/app/global/buttons-list';
 import { buttonsList } from 'src/app/models/buttons.model';
@@ -9,6 +9,7 @@ import { LoadingService } from 'src/app/services/loading.service';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { DeleteModalComponent } from 'src/app/shared/modals/delete-modal/delete-modal.component';
 import { Contacts } from 'src/app/models/contact.model';
+import { SearchService } from 'src/app/services/search.service';
 
 @Component({
   selector: 'app-contact-list',
@@ -16,23 +17,33 @@ import { Contacts } from 'src/app/models/contact.model';
   styleUrls: ['./contact-list.component.scss']
 })
 export class ContactListComponent implements OnInit {
-  buttonList!:buttonsList[];
+  buttonList!: buttonsList[];
   contactList!: Contacts[];
+  loading:boolean = false;
+  @Output() cleanInputSearch: EventEmitter<() => void> = new EventEmitter<() => void>();
+
+
   private unsubscribe$ = new Subject<void>();
 
   constructor(private contactsService: ContactsService, private alertService: AlertService,
-    private loadingService: LoadingService, public dialog: MatDialog) {
+    private loadingService: LoadingService, public dialog: MatDialog, private searchService: SearchService) {
     this.buttonList = buttons
+
+    this.searchService.searchResults$.subscribe(results => {
+      this.contactList = results;
+    });
   }
 
   ngOnInit() {
     this.getContacts();
-
+    this.loadingService.loading$.subscribe((loading: boolean) => {
+      this.loading = loading;
+    })
   }
-  buttonsOptions(type:string,contact:Contacts){
+  buttonsOptions(type: string, contact: Contacts) {
     switch (type) {
       case 'delete':
-        const dialogRef =  this.dialog.open(DeleteModalComponent,{
+        const dialogRef = this.dialog.open(DeleteModalComponent, {
           data: contact,
         })
         dialogRef.afterClosed().subscribe(wasDeleted => {
@@ -45,16 +56,21 @@ export class ContactListComponent implements OnInit {
       default:
         break;
     }
-
   }
 
-  getContacts(){
+  getContacts() {
     this.loadingService.setLoading(true);
     this.contactsService.getContacts()
       .pipe(takeUntil(this.unsubscribe$)).subscribe({
         next: (contacts) => {
           if (contacts.status === 200) {
-            this.contactList=contacts.data;
+            this.contactList = []
+            contacts.data.forEach(element => {
+              element.fullName = element.name + ' ' + element.lastName
+              this.contactList.push(element)
+            });
+            this.searchService.saveArray(this.contactList);
+            this.cleanInputSearch.emit();
             this.loadingService.setLoading(false);
           } else {
             this.loadingService.setLoading(false);
@@ -67,6 +83,7 @@ export class ContactListComponent implements OnInit {
         },
       })
   }
+
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();

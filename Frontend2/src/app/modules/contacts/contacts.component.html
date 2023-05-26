@@ -3,7 +3,7 @@
   <div class="search">
   <mat-form-field appearance="legacy">
     <mat-label>Buscar</mat-label>
-    <input matInput placeholder="">
+    <input matInput [(ngModel)]="inputValue" (input)="updateSearchQuery()">
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
   </div>
@@ -12,7 +12,7 @@
     <h2>Lista de contactos</h2>
   </div>
 
-  <app-contact-list></app-contact-list>
+  <app-contact-list (cleanInputSearch)="cleanInput('')"></app-contact-list>
 
   <app-add-button></app-add-button>
 </div>

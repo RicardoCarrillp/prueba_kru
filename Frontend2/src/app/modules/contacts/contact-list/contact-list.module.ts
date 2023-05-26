@@ -7,6 +7,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteModalComponent } from 'src/app/shared/modals/delete-modal/delete-modal.component';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   imports: [
@@ -15,7 +16,9 @@ import { DeleteModalComponent } from 'src/app/shared/modals/delete-modal/delete-
     MatIconModule,
     MatDividerModule,
     MatProgressSpinnerModule,
-    MatDialogModule
+    MatDialogModule,
+    MatMenuModule
+
   ],
   entryComponents:[DeleteModalComponent],
   declarations: [ContactListComponent],

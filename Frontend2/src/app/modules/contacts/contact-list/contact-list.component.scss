@@ -29,6 +29,15 @@
         align-items: center;
       }
     }
+    .no-data {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      h2 {
+        font-weight: bold;
+        color: #006191;
+      }
+    }
   }
 
   .loading-spinner {

@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ContactListModule } from './contact-list/contact-list.module';
 import { AddButtomModule } from 'src/app/shared/add-button/add-button.module';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   imports: [
     CommonModule,
@@ -14,6 +15,7 @@ import { AddButtomModule } from 'src/app/shared/add-button/add-button.module';
     MatInputModule,
     MatIconModule,
     MatFormFieldModule,
+    FormsModule,
     ContactListModule,
     AddButtomModule
   ],

@@ -1,4 +1,5 @@
 export interface Contacts{
+  fullName?: string;
   name: string,
   lastName: string,
   email: string,
