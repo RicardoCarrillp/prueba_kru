@@ -3,7 +3,7 @@
 Descripción del Proyecto
 Este proyecto está desarrollado en Node.js y utiliza Firebase Admin SDK para realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) en una base de datos Firestore de Firebase. Proporciona una interfaz de programación de aplicaciones (API) que permite interactuar con la base de datos y realizar operaciones básicas en colecciones y documentos.
 
-## Configuración del Proyecto
+## Configuración del Proyecto Backend
 
 A continuación se detallan los pasos para configurar y ejecutar el proyecto de Node.js con Firebase.
 1. Clona el repositorio o descarga los archivos del proyecto.
