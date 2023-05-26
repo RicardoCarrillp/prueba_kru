@@ -17,7 +17,7 @@ A continuación se detallan los pasos para configurar y ejecutar el proyecto de 
  
 5. ¡El proyecto está configurado y listo para ser ejecutado!
 
-## Ejecución del Proyecto
+## Ejecución del Proyecto Backend
 
 A continuación, se detallan los comandos para ejecutar el proyecto:
 
